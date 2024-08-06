@@ -1,10 +1,61 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom';
 
 
 function Navbar() {
 
     const [isMenu, setisMenu] = useState(false);
-    const darkmodeToggleButton = <label className=" swap swap-rotate">
+    const [scrolled, setScrolled] = useState(false);
+    // const[darkMode, setdarkMode] = useState(localStorage.getItem('darkMode')?localStorage.getItem('darkMode'): false);
+    const[darkMode, setdarkMode] = useState(false);
+
+    // useEffect(() => {
+
+    //   if(darkMode===true){
+    //     {document.documentElement.classList.add('dark');
+    //         document.body.classList.add('dark');
+    //     }
+    //     localStorage.setItem('darkMode',true);
+    //   }else{
+    //     {document.documentElement.classList.remove('dark');
+    //         document.body.classList.remove('dark');
+    //     }
+    //     localStorage.setItem('darkMode',false);
+    //   }
+    //   {console.log(darkMode)}
+      
+    // }, [darkMode])
+    useEffect(() => {
+             if(darkMode){
+                document.documentElement.classList.add('dark');
+                // document.body.classList.add('dark');
+                console.log("i m in if ")
+                // localStorage.setItem('darkMode',true);
+              }else{
+                document.documentElement.classList.remove('dark');
+                // document.body.classList.remove('dark');
+                console.log("i m in else ")
+                // localStorage.setItem('darkMode',false);
+              }
+              console.log(darkMode)
+    }, [darkMode])
+    
+    
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) setScrolled(true);
+            else setScrolled(false);
+        }
+
+        window.addEventListener("scroll", handleScroll)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [])
+
+    const darkmodeToggleButton = <div >
+        <label className=" swap swap-rotate">
         {/* this hidden checkbox controls the state */}
         <input type="checkbox" className="theme-controller" value="synthwave" />
 
@@ -26,14 +77,16 @@ function Navbar() {
                 d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
         </svg>
     </label>
+    </div>
     // const toggleDropdown = () => {
     //     setisMenu(!isMenu);
     // };
     return (
-        <div className='mx-s md:mx-16  '>
-            <div className="p-0 navbar bg-base-100">
+        <div className={`px-8    md:px-16 transition sticky z-50 top-0 left-0 right-0  ${scrolled ? 'dark:bg-slate-600 bg-slate-100 shadow-md ' : ''} `}>
+            {document.documentElement.classList.add('dark')}
+            <div className="p-0  document.documentElement.classList.add('dark');  navbar ">
                 <div className="navbar-start">
-                    <div className="dropdown md:hidden" onClick={() => setisMenu(!isMenu)}>
+                    <div className="dropdown lg:hidden" onClick={() => setisMenu(!isMenu)}>
 
                         <div id='menu-button' tabIndex={0} role="button" className="btn btn-ghost  ">
 
@@ -55,11 +108,27 @@ function Navbar() {
                         {isMenu && <ul
 
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2  shadow">
-                            <li><a>Home</a></li>
-                            <li><a>Course</a></li>
-                            <li><a>Contact</a></li>
-                            <li><a>About</a></li>
+                            className={`menu menu-md dropdown-content ${scrolled ? "bg-slate-100" : "bg-white"} rounded-box  mt-3 w-52 p-2  shadow`} >
+                            {/* <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>Home</a></li>
+                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>Books</a></li>
+                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>Contact</a></li>
+                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>About</a></li> */}
+                            <li><NavLink to='/' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>Home</NavLink></li>
+                            <li><NavLink to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>Books</NavLink></li>
+                            <li><NavLink to='/contact' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>Contact</NavLink></li>
+                            <li><NavLink to='/about' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>About</NavLink></li>
                         </ul>}
 
                     </div>
@@ -67,26 +136,29 @@ function Navbar() {
 
                 </div>
                 <div className="navbar-end">
-                    <div className="navbar-center hidden md:flex">
-                        <ul className="menu menu-horizontal ">
-                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600 hover:underline'>Home</a></li>
-                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600 hover:underline'>Course</a></li>
-                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600 hover:underline'>Contact</a></li>
-                            {/* <li>
-                                    <details>
-                                        <summary>Parent</summary>
-                                        <ul className="p-2">
-                                            <li><a>Submenu 1</a></li>
-                                            <li><a>Submenu 2</a></li>
-                                        </ul>
-                                    </details>
-                                </li> */}
-                            <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600 hover:underline'>About</a></li>
+                    <div className="navbar-center hidden lg:flex">
+                        <ul className="menu menu-horizontal">
+                            <li><NavLink to='/' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>Home</NavLink></li>
+                            <li><NavLink to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>Books</NavLink></li>
+                            <li><NavLink to='/contact' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>Contact</NavLink></li>
+                            <li><NavLink to='/about' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                style={({ isActive }) =>
+                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                }>About</NavLink></li>
                         </ul>
                     </div>
                     <div className='hidden md:block px-2'>
                         <label className="border border-gray-300 px-2 py-1 rounded-md flex items-center gap-2">
-                            <input type="text" className="outline-none grow " placeholder="Search" />
+                            <input type="text" className="bg-transparent  outline-none  " placeholder="Search" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16"
@@ -99,15 +171,60 @@ function Navbar() {
                             </svg>
                         </label>
                     </div>
-                    <div className='hidden border justify-center items-center md:flex border-gray-300 rounded-full p-0.5 mr-3 '>
+                    {/* sun icon */}
+                    {/* <div className='hidden  justify-center items-center md:flex border-gray-300 rounded-full p-0.5 mr-3 '
+                    // onClick={()=> setdarkMode(!darkMode)}
+                    >
                         {darkmodeToggleButton}
-                    </div>
+                    </div> */}
+                    {/* moon icon */}
+                    {/* <button onClick={()=> {setdarkMode(!darkMode); console.log(darkMode)}}>
+                        click trial
+                    </button> */}
 
-                    <div className="navbar-end"></div>
-                    <div className='flex border justify-center items-center border-gray-300 rounded-full p-0.5 mr-2 md:hidden'>
+                    <button onClick={()=> { setdarkMode(!darkMode)}} >
+                        {darkMode? 'light': 'dark'}
+                    </button>
+                    
+                    {/* <button className='flex  justify-center items-center border-gray-300 rounded-full p-0.5 mr-2 '
+                    onClick={(e)=> {e.stopPropagation(); setdarkMode((prev)=>!prev); console.log(darkMode)}}
+                    >
                         {darkmodeToggleButton}
+                    </button> */}
+                    <a
+                        onClick={() => document.querySelector("#myModal").classList.remove("hidden")}
+                        className=" text-white cursor-pointer hover:shadow-lg hover:bg-red-600 bg-black rounded-md px-3 py-2  flex text-center justify-center">Login</a>
+
+                    {/* Modal code is here: */}
+                    <div id="myModal" className="hidden fixed  inset-0 bg-slate-300 bg-opacity-50 flex items-center justify-center ">
+                        <div className=" bg-white  relative rounded-lg   p-8 rounded shadow-lg w-1/3">
+                            {/* <div className="flex justify-end">
+                        <button id="closeModalBtn" className="text-gray-500 hover:text-gray-800"
+                        onClick={()=>document.querySelector("#myModal").classList.add("hidden")}
+                        >&times;</button>
+                        </div> */}
+                            <button className="btn h-[50px] w-[50px] hover:bg-slate-200 btn-sm btn-circle btn-ghost absolute right-2 sm:right-6 top-2 sm:top-6" onClick={() => document.querySelector("#myModal").classList.add("hidden")}>✕</button>
+                            <h2 className="text-2xl font-bold text-red-600 mb-10">Login</h2>
+                            <div className='mb-5'>
+                                <span>Email:</span><br />
+                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' />
+                            </div>
+                            <div className='mb-5'>
+                                <span>Password:</span><br />
+                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Password' />
+                            </div>
+                            <div className='flex justify-center mb-2 items-center sm:hidden'>
+                                <button className={`bg-red-600 h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
+                            </div>
+                            <div className='flex justify-center sm:justify-between'>
+                                <button className={`bg-red-600 hidden sm:block h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
+
+                                <p className='text-center'>Not Registered?<Link to='/signup' onClick={() => document.querySelector("#myModal").classList.add("hidden")} className='text-blue-600 hover:text-blue-800'>Signup</Link>
+                                </p>
+                                 
+                            </div>
+                        </div>
                     </div>
-                    <a className=" text-white bg-black rounded-md px-3 py-2  flex text-center justify-center">Login</a>
                 </div>
 
 

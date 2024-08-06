@@ -1,13 +1,14 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Footer from './components/Footer'
+import {Navbar, Footer} from './components'
+import {Outlet} from "react-router-dom"
 
 function App() {
   return <>
-  <Navbar/>
-  <Home/>
-  <Footer/>
+      <div className='dark:bg-slate-900 dark:text-white'>
+        <Navbar/>
+        <Outlet/>
+        <Footer/>
+      </div>
   </>
 }
 

@@ -9,3 +9,31 @@ body{
     font-family:"Poppins";
     
 }
+
+/* Custom styles to ensure arrows are visible */
+.slick-arrow::before {
+    color: black;
+    /* Change this to your preferred color */
+  }
+  
+  .slick-arrow{
+    width: 30px;
+    height: 30px;
+    
+    z-index: 1;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.925); /* Optional: Add background color */
+    border-radius: 50%; /* Optional: Make arrows round */
+  }
+  
+  .slick-arrow:hover {
+    background-color: rgba(255, 255, 255, 1); /* Optional: Change background color on hover */
+  }
+
+ 
+
+  
+  
+  

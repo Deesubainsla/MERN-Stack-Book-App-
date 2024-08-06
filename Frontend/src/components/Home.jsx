@@ -1,16 +1,25 @@
 import React from 'react'
 import homeimage from "../../public/homeimg.jpg"
+import FreeBooks from './FreeBooks'
 
 function Home() {
     return <>
-        <div className='mx-8 md:mx-16    md:flex'>
-            <div className='md:w-1/2 h-auto'>
+    <div className='px-8 md:px-16 '>
 
-                <h1 className='text-3xl font-bold mt-32 '>Hello, Welcome here to learn
-                    something, <span className='text-red-600'>new everyday!!!</span>
+        <div className='lg:flex mb-11'>
+
+            <div className=" lg:hidden  " >
+                
+                <img className="object-cover w-full h-full" src={homeimage} alt="booksimage" />
+            </div>
+
+            <div className='lg:w-1/2  h-auto'>
+
+                <h1 className='text-3xl font-bold lg:mt-32 '>Hello, Welcome here to learn
+                    <br />something, <span className='text-red-600'>new everyday!!!</span>
                 </h1>
 
-                <p className='text-lg leading-relaxed my-12'>
+                <p className='text-lg leading-relaxed my-12 '>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae rerum totam veniam eaque nam nemo deserunt!!
                 </p>
 
@@ -34,7 +43,7 @@ function Home() {
                 {/* <input class="mt-10 outline-none focus:ring  focus:ring-blue-500" type="text" placeholder="Focus me to see ring" /> */}
                 
                 <div>
-                    <a className="my-2 text-white inline-block bg-black rounded-md px-2 py-1">Verify</a>
+                    <a className="my-2 cursor-pointer hover:shadow-lg hover:bg-red-600 text-white inline-block bg-black rounded-md px-2 py-1">Verify</a>
                 </div>
                 
                 
@@ -42,11 +51,16 @@ function Home() {
 
             </div>
 
-            <div className="md:w-1/2   overflow-hidden" >
+            <div className=" lg:w-1/2 hidden lg:flex  overflow-hidden" >
                 
-                <img className="w-[150%] h-full" src={homeimage} alt="booksimage" />
+                <img className=" h-full w-full" src={homeimage} alt="booksimage" />
             </div>
         </div>
+
+        <FreeBooks/>
+
+
+    </div>    
     </>
 }
 
