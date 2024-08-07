@@ -1,11 +1,27 @@
-import React from 'react'
-import Card from './Card'
+import React, { useState, useEffect } from 'react'
 import CardSlider from './CardSlider.jsx'
-import list from "../../public/list.json"
+import axios from 'axios'
 
 function FreeBooks() {
 
-    const freelist = list.filter((card) => card.category === "Free")
+    const [freelist, setfreelist] = useState([])
+    useEffect(() => {
+      const getdata = async()=>{
+       try {
+         await axios.get('http://localhost:3000/books')
+         .then((res)=>{
+             const free = res.data.filter((card) => card.category === "Free");
+             setfreelist(free);
+         })
+       } catch (error) {
+            console.log("Error freelist: ",error.message);
+       }
+      }
+      getdata();
+    }, [])
+    
+
+    
     
 
     return <>

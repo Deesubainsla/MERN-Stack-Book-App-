@@ -12,7 +12,7 @@ function Card({card}) {
                 </figure>
                 <div className="card-body p-5">
                     <h2 className="card-title">
-                        {card.tittle}
+                        {card.title}
                         <div className="badge bg-red-600 text-white badge-secondary">{card.category}</div>
                     </h2>
                     <p className='mb-3'>{card.description}</p>

@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link}  from 'react-router-dom'
-import list from '../../public/list.json'
+
 import Card from './Card'
+import axios from 'axios'
+
 
 function Books() {
 
+    const [list, setlist] = useState([])
+    useEffect( () => {
+        const getdata = async()=>{
+            try {
+                await axios.get('http://localhost:3000/books')
+                .then((res)=>{
+                    
+                    setlist(res.data);
+                })
+            } catch (error) {
+                console.log("Error in book fetching :",error)
+            }
+        }
+        getdata();
+        
+    }, [])
+    
     
 
     return <>
