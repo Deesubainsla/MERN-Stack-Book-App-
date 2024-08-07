@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
+import { useForm } from "react-hook-form"
 
 
 function Navbar() {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm()
+    const onSubmit = (data) => console.log(data)
 
     const [isMenu, setisMenu] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -29,12 +37,12 @@ function Navbar() {
              if(darkMode){
                 document.documentElement.classList.add('dark');
                 // document.body.classList.add('dark');
-                console.log("i m in if ")
+                console.log("i am in if ")
                 // localStorage.setItem('darkMode',true);
               }else{
                 document.documentElement.classList.remove('dark');
                 // document.body.classList.remove('dark');
-                console.log("i m in else ")
+                console.log("i am in if ")
                 // localStorage.setItem('darkMode',false);
               }
               console.log(darkMode)
@@ -55,13 +63,15 @@ function Navbar() {
     }, [])
 
     const darkmodeToggleButton = <div >
-        <label className=" swap swap-rotate">
+        <label  className=" swap swap-rotate">
         {/* this hidden checkbox controls the state */}
-        <input type="checkbox" className="theme-controller" value="synthwave" />
+        <input  onClick={()=>setdarkMode(!darkMode)}  type="checkbox" className="theme-controller" value="synthwave" />
 
         {/* sun icon */}
         <svg
-            className="swap-off h-7 w-7 fill-current"
+            
+            className="swap-on h-7 w-7 fill-current"
+            
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24">
             <path
@@ -70,7 +80,7 @@ function Navbar() {
 
         {/* moon icon */}
         <svg
-            className="swap-on h-7 w-7 fill-current"
+            className="swap-off h-7 w-7 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24">
             <path
@@ -82,9 +92,10 @@ function Navbar() {
     //     setisMenu(!isMenu);
     // };
     return (
-        <div className={`px-8    md:px-16 transition sticky z-50 top-0 left-0 right-0  ${scrolled ? 'dark:bg-slate-600 bg-slate-100 shadow-md ' : ''} `}>
-            {document.documentElement.classList.add('dark')}
-            <div className="p-0  document.documentElement.classList.add('dark');  navbar ">
+        
+        <div className={`px-8 dark:bg-slate-900 dark:text-white md:px-16 transition bg-white sticky z-50 top-0 left-0 right-0  ${scrolled ? 'dark:bg-slate-800 bg-slate-200 shadow-md ' : ''} `}>
+            
+            <div className="p-0    navbar ">
                 <div className="navbar-start">
                     <div className="dropdown lg:hidden" onClick={() => setisMenu(!isMenu)}>
 
@@ -108,7 +119,7 @@ function Navbar() {
                         {isMenu && <ul
 
                             tabIndex={0}
-                            className={`menu menu-md dropdown-content ${scrolled ? "bg-slate-100" : "bg-white"} rounded-box  mt-3 w-52 p-2  shadow`} >
+                            className={` dark:bg-slate-900 menu menu-md dropdown-content ${scrolled ? "dark:bg-slate-800 bg-slate-100" : "bg-white"} rounded-box  mt-3 w-52 p-2  shadow`} >
                             {/* <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>Home</a></li>
                             <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>Books</a></li>
                             <li><a className='transform transition duration-300 ease-in-out hover:scale-110 hover:text-red-600'>Contact</a></li>
@@ -182,18 +193,18 @@ function Navbar() {
                         click trial
                     </button> */}
 
-                    <button onClick={()=> { setdarkMode(!darkMode)}} >
+                    {/* <button onClick={()=> { setdarkMode(!darkMode)}} >
                         {darkMode? 'light': 'dark'}
-                    </button>
+                    </button> */}
                     
-                    {/* <button className='flex  justify-center items-center border-gray-300 rounded-full p-0.5 mr-2 '
-                    onClick={(e)=> {e.stopPropagation(); setdarkMode((prev)=>!prev); console.log(darkMode)}}
+                    <button className='flex  justify-center items-center border-gray-300 rounded-full p-0.5 mr-2 '
+                    
                     >
                         {darkmodeToggleButton}
-                    </button> */}
+                    </button>
                     <a
                         onClick={() => document.querySelector("#myModal").classList.remove("hidden")}
-                        className=" text-white cursor-pointer hover:shadow-lg hover:bg-red-600 bg-black rounded-md px-3 py-2  flex text-center justify-center">Login</a>
+                        className=" dark:bg-red-600 text-white cursor-pointer hover:shadow-lg hover:bg-red-600 bg-black rounded-md px-3 py-2  flex text-center justify-center">Login</a>
 
                     {/* Modal code is here: */}
                     <div id="myModal" className="hidden fixed  inset-0 bg-slate-300 bg-opacity-50 flex items-center justify-center ">
@@ -203,26 +214,38 @@ function Navbar() {
                         onClick={()=>document.querySelector("#myModal").classList.add("hidden")}
                         >&times;</button>
                         </div> */}
-                            <button className="btn h-[50px] w-[50px] hover:bg-slate-200 btn-sm btn-circle btn-ghost absolute right-2 sm:right-6 top-2 sm:top-6" onClick={() => document.querySelector("#myModal").classList.add("hidden")}>✕</button>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <button className="dark:text-black btn h-[50px] w-[50px] hover:bg-slate-200 btn-sm btn-circle btn-ghost absolute right-2 sm:right-6 top-2 sm:top-6" onClick={() => document.querySelector("#myModal").classList.add("hidden")}>✕</button>
                             <h2 className="text-2xl font-bold text-red-600 mb-10">Login</h2>
                             <div className='mb-5'>
                                 <span>Email:</span><br />
-                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' />
+                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' {...register("email", { required:true
+                                //can also write like this for custom messages
+                                // {
+                                //     value: true,
+                                //     message: "This hello is required:"
+                                // }
+                                 })} />
+                                 <br />
+                                {errors.email && <span className='text-sm text-red-600'>This field is required:</span>}
                             </div>
                             <div className='mb-5'>
                                 <span>Password:</span><br />
-                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Password' />
+                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="password" placeholder='Enter your Password' {...register("password", { required: true })}/>
+                                <br />
+                                {errors.email && <span className='text-sm text-red-600'>This field is required:</span>}
                             </div>
                             <div className='flex justify-center mb-2 items-center sm:hidden'>
-                                <button className={`bg-red-600 h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
+                                <button type='submit' className={`bg-red-600 h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
                             </div>
                             <div className='flex justify-center sm:justify-between'>
-                                <button className={`bg-red-600 hidden sm:block h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
+                                <button type='submit' className={`bg-red-600 hidden sm:block h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
 
                                 <p className='text-center'>Not Registered?<Link to='/signup' onClick={() => document.querySelector("#myModal").classList.add("hidden")} className='text-blue-600 hover:text-blue-800'>Signup</Link>
                                 </p>
                                  
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

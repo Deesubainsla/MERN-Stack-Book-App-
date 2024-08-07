@@ -1,5 +1,5 @@
 import React from 'react'
-import homeimage from "../../public/homeimg.jpg"
+import homeimage from "../../public/homeimage.png"
 import FreeBooks from './FreeBooks'
 
 function Home() {
@@ -23,8 +23,8 @@ function Home() {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae rerum totam veniam eaque nam nemo deserunt!!
                 </p>
 
-                <div>
-                    <label class="border px-2 py-1 border-gray-300 rounded-md flex items-center gap-2">
+                <div className='pr-12'>
+                    <label class=" border px-2 py-1 border-gray-300 rounded-md flex items-center gap-2">
                       
                        <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -36,14 +36,14 @@ function Home() {
                             <path
                                 d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                         </svg>
-                        <input type="text" className="outline-none grow" placeholder="Email" />
+                        <input type="text" className="outline-none bg-base-200 grow" placeholder="Email" />
                         
-                        </label>
-                    </div>
+                    </label>
+                </div>
                 {/* <input class="mt-10 outline-none focus:ring  focus:ring-blue-500" type="text" placeholder="Focus me to see ring" /> */}
                 
                 <div>
-                    <a className="my-2 cursor-pointer hover:shadow-lg hover:bg-red-600 text-white inline-block bg-black rounded-md px-2 py-1">Verify</a>
+                    <a className="dark:bg-red-600 my-2 cursor-pointer hover:shadow-lg hover:bg-red-600 text-white inline-block bg-black rounded-md px-2 py-1">Verify</a>
                 </div>
                 
                 
@@ -51,10 +51,11 @@ function Home() {
 
             </div>
 
-            <div className=" lg:w-1/2 hidden lg:flex  overflow-hidden" >
+            <div className=" dark:bg-slate-900 lg:w-1/2 hidden lg:flex  overflow-hidden" >
                 
-                <img className=" h-full w-full" src={homeimage} alt="booksimage" />
+                <img className="  h-full w-full" src={homeimage} alt="booksimage" />
             </div>
+            
         </div>
 
         <FreeBooks/>

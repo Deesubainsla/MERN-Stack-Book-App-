@@ -47,7 +47,7 @@ function CardSlider({ cards }) {
             <Slider {...settings}>
 
                 {cards.map((item) => (
-                    <div key={item.id} className='card'>
+                    <div key={item.id} className='px-auto'>
                         <Card card={item} />
                     </div>
                 ))}
