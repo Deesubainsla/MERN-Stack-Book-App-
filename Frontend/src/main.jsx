@@ -8,10 +8,22 @@ import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter,Route, RouterProvider, createRoutesFromElements } from 'react-router-dom';
 import { userContext, UserContextProvider } from './context/AuthUserContext.jsx'
 
+//a component for get right component (used in route you can see:)
 const BookorSignup = ()=>{
   const {user} = useContext(userContext);
   return (user?<Books/>:<Signup/>);
 }
+
+//IIFE
+// (()=>{
+//   const {user} = useContext(userContext);
+//   if(!user){
+//     setTimeout(() => {
+//       document.querySelector("#myModal").classList.add("hidden");
+//     }, 10000);
+//   }
+// })();
+
 
 
 

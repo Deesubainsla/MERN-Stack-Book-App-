@@ -47,6 +47,30 @@ function Navbar() {
        }
     }
 
+    //working onetime only at starting:
+    useEffect(() => {
+        if(!userInfo.user){
+            console.log("in if statement:")
+            setTimeout(() => {
+            
+            document.querySelector("#myModal").classList.remove("hidden");
+            }, 10000);
+        }
+    }, [])
+    
+    //IIFE //problem re-render everytime when component re-render:
+    // (()=>{
+    // // const {user} = useContext(userContext);
+    // console.log("new function working:")
+    // if(!userInfo.user){
+    //     console.log("in if statement:")
+    //     setTimeout(() => {
+        
+    //     document.querySelector("#myModal").classList.remove("hidden");
+    //     }, 10000);
+    // }
+    // })();
+
     const [isMenu, setisMenu] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     // const[darkMode, setdarkMode] = useState(localStorage.getItem('darkMode')?localStorage.getItem('darkMode'): false);
