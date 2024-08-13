@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick"
 import Card from './Card';
+import list1 from "../../public/list.json"
+import axios from 'axios';
 
 function CardSlider({ cards }) {
+    const [list, setlist] = useState([]);
+
+    useEffect(() => {
+        //it is a IIFE(immediately invoked function expression) run automatic without call them explicitly.
+      (async()=>{
+       try {
+            await axios.get('http://localhost:3000/books')
+            .then((res)=>{
+               setlist(res.data.filter((item)=> item.category === 'Free'));
+            
+            })
+       } catch (error) {
+            console.log('Error: ', error?.message);
+       }
+      })();
+      
+    }, [])
+    
 
     var settings = {
         dots: true,
@@ -46,7 +66,7 @@ function CardSlider({ cards }) {
         <div className="slider-container">
             <Slider {...settings}>
 
-                {cards.map((item) => (
+                {list.map((item) => (
                     <div key={item.id} className='px-auto'>
                         <Card card={item} />
                     </div>

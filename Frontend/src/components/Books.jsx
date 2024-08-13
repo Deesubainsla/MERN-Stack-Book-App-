@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {Link}  from 'react-router-dom'
-
+// import list from '../../public/list.json'
 import Card from './Card'
 import axios from 'axios'
 
@@ -13,7 +13,8 @@ function Books() {
             try {
                 await axios.get('http://localhost:3000/books')
                 .then((res)=>{
-                    
+                    // small object header,status and some other things are also present there with data
+                    console.log(res);
                     setlist(res.data);
                 })
             } catch (error) {
