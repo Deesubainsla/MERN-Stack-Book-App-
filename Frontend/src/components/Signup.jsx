@@ -56,14 +56,14 @@ function Signup() {
                         <h2 className="text-2xl font-bold text-red-600 mb-10">Signup</h2>
                         <div className='mb-5'>
                             <span>Name:</span><br />
-                            <input className='p-1 w-full outline-none rounded-md border-[2px]' type="text" placeholder='Enter your Name' {...register("name", { required: true })} />
+                            <input className='p-1 w-full dark:text-black outline-none rounded-md border-[2px]' type="text" placeholder='Enter your Name' {...register("name", { required: true })} />
                             <br />
                             {errors.name && <span className='text-red-600 text-sm'>This field is required:</span>}
 
                         </div>
                         <div className='mb-5'>
                             <span>Email:</span><br />
-                            <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' {...register("email", { required: true })} />
+                            <input className='p-1 w-full dark:text-black outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' {...register("email", { required: true })} />
                             {errors.email && <span className='text-red-600 text-sm'>This field is required:</span>}
                         </div>
                         <div className='mb-5'>
@@ -83,13 +83,14 @@ function Signup() {
                         </div>
 
 
-                        <div type='submit' className='flex justify-center mb-2 items-center '>
-                            <button className={`bg-red-600 h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Signup</button>
+                        <div className='flex justify-center mb-2 items-center '>
+                            <button type='submit' className={`bg-red-600 h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Signup</button>
                         </div>
-                        <div type='submit' className='flex justify-center '>
+                        <div className='flex justify-center '>
                             {/* <button className={`bg-red-600 hidden sm:block h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Signup</button> */}
 
-                            <p className='text-center'>Have Account?<Link to='/'
+                            <p className='text-center'>Have Account?
+                                <Link to='/'
                                 onClick={() => document.querySelector("#myModal").classList.remove("hidden")} className='text-blue-600 hover:text-blue-800'>Login</Link>
                             </p>
                         </div>

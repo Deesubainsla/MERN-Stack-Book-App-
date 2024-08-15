@@ -27,9 +27,10 @@ function Navbar() {
             .then((res)=>{ 
                 toast.success("Login successfully:"
                 //can castumize many things check chatgpt:
-                ,{
-                duration: 3000, // Duration in milliseconds
-                });
+                // ,{
+                // duration: 3000, // Duration in milliseconds
+                // }
+            );
                 
                 localStorage.setItem('User',JSON.stringify(res.data.user));
                 
@@ -203,7 +204,7 @@ function Navbar() {
                         </ul>}
 
                     </div>
-                    <a className="btn btn-ghost text-xl p-0 transform transition ease-in-out duration-300 hover:text-red-600 hover:scale-110  ">BookApp</a>
+                    <Link to='/' className="btn btn-ghost text-xl p-0 transform transition ease-in-out duration-300 hover:text-red-600 hover:scale-110  ">BookApp</Link>
 
                 </div>
                 <div className="navbar-end">
@@ -285,7 +286,7 @@ function Navbar() {
                             <h2 className="text-2xl font-bold text-red-600 mb-10">Login</h2>
                             <div className='mb-5'>
                                 <span>Email:</span><br />
-                                <input className='p-1 w-full outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' {...register("email", { required:true
+                                <input className='p-1 w-full dark:text-black outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' {...register("email", { required:true
                                 //can also write like this for custom messages and apply
                                 //multiple validations on single input for min different
                                 // required:{

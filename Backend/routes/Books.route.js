@@ -1,9 +1,10 @@
 import express from 'express'
-import { getBook } from '../controllers/Books.controller.js';
+import { getBook, addBook } from '../controllers/Books.controller.js';
 
 const router = express.Router();
 
 router.get('/', getBook)
+router.post('/addbook', addBook)
 
 
 //they are diffrent endpoint working after /books
