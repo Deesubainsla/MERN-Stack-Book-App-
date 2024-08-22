@@ -1,5 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@500&display=swap');
+/* @import 'ionicons/css/ionicons.min.css'; */
+/* @import 'ionicons/dist/css/ionicons.min.css'; */
+
+
+
+
 
 @tailwind base;
 @tailwind components;

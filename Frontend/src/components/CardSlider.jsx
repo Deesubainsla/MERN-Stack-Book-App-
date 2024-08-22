@@ -8,16 +8,16 @@ import axios from 'axios';
 
 function CardSlider({ cards }) {
     const [list, setlist] = useState([]);
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
         //it is a IIFE(immediately invoked function expression) run automatic without call them explicitly.
       (async()=>{
        try {
-            await axios.get('http://localhost:3000/books')
-            .then((res)=>{
-               setlist(res.data.filter((item)=> item.category === 'Free'));
-            
-            })
+            const res = await axios.get('http://localhost:3000/books');
+            //(list.length) for finding length and know if the array is empty: 
+            setlist(res.data.filter((item) => item.category === 'Free'));
+            setloading(false);
        } catch (error) {
             console.log('Error: ', error?.message);
        }
@@ -61,19 +61,25 @@ function CardSlider({ cards }) {
         ]
     };
 
-    return <>
 
-        <div className="slider-container">
+    // if(loading){
+    //     return <div>Loading...</div>
+    // }
+
+    return <>
+        {/* this code will show the list after setlist will implement */}
+        {loading? 'Loading...': <div className="slider-container">
             <Slider {...settings}>
 
                 {list.map((item) => (
-                    <div key={item.id} className='px-auto'>
+                    <div key={item._id} className='px-auto'>
                         <Card card={item} />
                     </div>
                 ))}
 
             </Slider>
-        </div>
+        </div> }
+        
     </>
 }
 

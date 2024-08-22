@@ -14,7 +14,7 @@ function Books() {
                 await axios.get('http://localhost:3000/books')
                 .then((res)=>{
                     // small object header,status and some other things are also present there with data
-                    console.log(res);
+                    // console.log(res.data);
                     setlist(res.data);
                 })
             } catch (error) {

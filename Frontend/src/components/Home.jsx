@@ -36,14 +36,14 @@ function Home() {
                             <path
                                 d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                         </svg>
-                        <input type="text" className="outline-none bg-base-200 grow" placeholder="Email" />
+                        <input type="text" className="outline-none bg-base-200 grow" placeholder="Feedback" />
                         
                     </label>
                 </div>
                 {/* <input class="mt-10 outline-none focus:ring  focus:ring-blue-500" type="text" placeholder="Focus me to see ring" /> */}
                 
                 <div>
-                    <a className="dark:bg-red-600 my-2 cursor-pointer hover:shadow-lg hover:bg-red-600 text-white inline-block bg-black rounded-md px-2 py-1">Verify</a>
+                    <a className="bg-red-600 my-2 cursor-pointer hover:shadow-xl duration-200 hover:scale-105  text-white inline-block  rounded-md px-2 py-1">send Feedback</a>
                 </div>
                 
                 

@@ -1,3 +1,4 @@
+import { Cart } from "../models/Cart.model.js";
 import { User } from "../models/User.model.js";
 import bcrypt from 'bcrypt'
 
@@ -41,10 +42,17 @@ export const signin = async(req, res)=>{
             email,
             password: securepass
         })
-    
         await newUser.save();
+
         const user = await User.findOne({email}).select("_id name email");
-    
+        const cart = new Cart({
+            user:user._id,
+            useremail:user.email,
+            items:[]
+        })
+
+        await cart.save();
+        
         res.status(201).json({message: "user created successfully:", user});
  
    } catch (error) {

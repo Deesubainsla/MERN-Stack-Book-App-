@@ -3,7 +3,9 @@ import 'dotenv/config'
 import mongoose from 'mongoose'
 import bookroute from './routes/Books.route.js'
 import userroute from './routes/User.route.js'
+import Cartroute from './routes/Cart.route.js'
 import cors from 'cors'
+import { upload } from './middlewares/multer.middleware.js'
 
 
 const app = express()
@@ -28,6 +30,7 @@ dbconnect();
 
 app.use(cors())
 app.use(express.json());//important for parse data and provide it to req.body
+app.use(express.urlencoded({extended: false}));
 
 //the below one is same as express.json() but for form action post
 // app.use(express.urlencoded({ extended: true }));
@@ -36,6 +39,7 @@ app.use(express.json());//important for parse data and provide it to req.body
 
 app.use('/books', bookroute )
 app.use('/user', userroute)
+app.use('/addtokart',Cartroute)
 
 app.get('/', (req, res) => {
   res.send('Trying express')
