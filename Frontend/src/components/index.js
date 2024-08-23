@@ -9,6 +9,7 @@ import Contact from "./Contact";
 import Books from "./Books";
 import Signup from "./Signup";
 import Logout from "./Logout";
+import AddBook from "./AddBook";
 
 
-export {Navbar, Home, FreeBooks, Footer, CardSlider, Card, Books, Contact, About, Signup,Logout}
+export {Navbar, Home, FreeBooks, Footer, CardSlider, Card, Books, Contact, About, Signup,Logout,AddBook}
