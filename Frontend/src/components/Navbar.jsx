@@ -159,6 +159,7 @@ function Navbar() {
     // const toggleDropdown = () => {
     //     setisMenu(!isMenu);
     // };
+    
     const [navshow, setnavshow] = useState('top-[-100%]')
 
     const closenav = ()=>{
@@ -168,10 +169,10 @@ function Navbar() {
     
     const handleClick = (e) => {
         const nav = document.querySelector(".phone-nav");
-        let opennav = nav.classList.contains('translate-y-[64px]');
+        let opennav = nav.classList.contains('translate-y-[19px]');
         if (!opennav) {
             e.target.name = 'close';
-            setnavshow('translate-y-[64px]');
+            setnavshow('translate-y-[19px]');
             // nav.classList.replace('top-[-100%]','top-[9%]');
         }
         else {
@@ -201,7 +202,7 @@ function Navbar() {
                                 </button>
                             </div>
 
-                            <div className={`transition ease-out py-2 phone-nav w-full duration-1000 left-[0%] ${navshow}  fixed ${scrolled ? "dark:bg-gray-800 bg-gray-200" : "bg-white dark:bg-slate-900 "}   `} >
+                            <div className={`transition ease-out py-2 phone-nav w-full duration-1000 left-[0] ${navshow}   fixed ${scrolled ? "dark:bg-gray-800 bg-gray-200" : "bg-white dark:bg-slate-900 "}   `} >
 
                                 <hr className='bg-red-600 w-[95%]  h-1 rounded mx-auto mb-2' />
 
@@ -210,12 +211,30 @@ function Navbar() {
 
                                     <div
                                         className="flex flex-col gap-2">
+
+                                        {userInfo.user && 
+                                            <div className='flex justify-center items-center my-1'><NavLink  onClick={closenav} to='/profile' 
+                                            className={({isActive})=>(
+
+                                                //if you use {} return something is compulsory. So, use () or nothing instead. 
+
+                                                `transform p-0 mx-1 rounded-full transition duration-300  ease-in-out hover:scale-110 ${isActive ? "ring-2 ring-red-600" :""}  `
+                                            )}
+                                            >
+            
+                                            <img className='h-[100px] w-[100px] rounded-full m-1' src={userInfo.user.profile} alt="profileimg" />
+            
+                                            </NavLink></div>
+                                        }
                                             
                                         <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/' className="inline-block transform transition duration-300  ease-in-out hover:scale-110  hover:text-red-600"
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                             }>Home</NavLink></div>
-                                        <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/books' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                        <div className='flex justify-center items-center'><NavLink onClick={()=>{
+                                            closenav();
+                                            userInfo.user?'':toast.error('To access Books Login in compulsory');
+                                        }} to='/books' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                             }>Books</NavLink></div>
@@ -231,10 +250,7 @@ function Navbar() {
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                             }>Contact</NavLink></div>
-                                        <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/about' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
-                                            style={({ isActive }) =>
-                                                isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
-                                            }>About</NavLink></div>
+                                       
                                             
                                     </div>
                                     {/* <hr className='absolute bottom-1' /> */}
@@ -255,7 +271,11 @@ function Navbar() {
                                 style={({ isActive }) =>
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                 }>Home</NavLink></li>
-                            <li><NavLink to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                            <li><NavLink onClick={()=>{
+
+                                userInfo.user?'':toast.error('To access Books Login in compulsory');
+
+                            }} to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                 style={({ isActive }) =>
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                 }>Books</NavLink></li>
@@ -273,10 +293,25 @@ function Navbar() {
                                 style={({ isActive }) =>
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                 }>Contact</NavLink></li>
-                            <li><NavLink to='/about' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
-                                style={({ isActive }) =>
-                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
-                                }>About</NavLink></li>
+
+                                {userInfo.user && 
+                                    <li><NavLink to='/profile' 
+                                    // className={({isActive})=>{
+                                    //     `transform ${isActive?"ring-2 ring-red-600":""} p-0 mx-1 transition duration-300  ease-in-out hover:scale-110 hover:text-red-600`
+                                    // }}
+                                    className={({ isActive }) =>
+                                        `transform p-0 mx-1 rounded-full transition duration-300  ease-in-out hover:scale-110 ${isActive ? "border-2  border-red-600" : ""}`
+                                    }
+                                    // style={({ isActive }) =>
+                                    //     isActive ? { ring: '#dc2626', textDecoration: 'underline' } : {}
+                                    // }
+                                    >
+    
+                                    <img className='h-[36px]  w-[36px] rounded-full ' src={userInfo.user.profile} alt="profileimg" />
+    
+                                    </NavLink></li>
+                                }
+                            
                         </ul>
                     </div>
                     <div className='hidden md:block px-2'>

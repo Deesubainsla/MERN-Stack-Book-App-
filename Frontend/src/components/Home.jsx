@@ -1,8 +1,41 @@
-import React from 'react'
+import React,{useContext, useRef} from 'react'
 import homeimage from "../../public/homeimage.png"
 import FreeBooks from './FreeBooks'
+import { userContext } from '../context/AuthUserContext.jsx'
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function Home() {
+    const userInfo = useContext(userContext);
+    const feedback = useRef(null)//give more access for modifications:
+    const handleFeedback = async()=>{
+        // const feedbackid = document.querySelector('#feed');
+        // console.log(feedback.current.value);
+        // feedback.current.value = '';
+       if(!userInfo.user){
+        feedback.current.value = '';
+        return toast.error("Login is compulsory");
+       }
+       try {
+            
+            const Info = {
+                usermail: userInfo.user.email,
+                user: userInfo.user.name,
+                message: feedback.current.value
+            }
+
+            await axios.post('http://localhost:3000/user/feedback',Info)
+            .then((res)=>{
+                
+               feedback.current.value = '';
+               toast.success(res.data.message);
+            })
+       } catch (error) {
+        
+            toast.error(error?.response.data.message);
+       }
+    }
+
     return <>
     <div className='px-8 md:px-16 '>
 
@@ -36,14 +69,14 @@ function Home() {
                             <path
                                 d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                         </svg>
-                        <input type="text" className="outline-none bg-base-200 grow" placeholder="Feedback" />
+                        <input ref={feedback} type="text" className="outline-none bg-base-200 grow" placeholder="Feedback to Deesu Bainsla" />
                         
                     </label>
                 </div>
                 {/* <input class="mt-10 outline-none focus:ring  focus:ring-blue-500" type="text" placeholder="Focus me to see ring" /> */}
                 
                 <div>
-                    <a className="bg-red-600 my-2 cursor-pointer hover:shadow-xl duration-200 hover:scale-105  text-white inline-block  rounded-md px-2 py-1">send Feedback</a>
+                    <a onClick={handleFeedback} className="bg-red-600 my-2 cursor-pointer hover:shadow-xl duration-200 hover:scale-105  text-white inline-block  rounded-md px-2 py-1">send Feedback</a>
                 </div>
                 
                 

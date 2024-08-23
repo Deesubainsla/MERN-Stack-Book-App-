@@ -23,7 +23,9 @@ function AddBook() {
         // console.log(data);
         
         const formdata = {
-            file: data.file[0],//design for handle multiple input.So, returns a FileList always
+            // file: data.file[0] ,//design for handle multiple input.So, returns a FileList always
+            // file: imgpreview ,//using reader.readAsDataURL(fileimg) url is not recomended as it takes more storage in DB
+            file: (data.file[0])?data.file[0] : imgpreview ,
             title: data.title,
             description: data.description,
             price: data.price,
@@ -53,7 +55,7 @@ function AddBook() {
     }
 
     // const [imgpreview, setimgpreview] = useState(null)
-    const [imgpreview, setimgpreview] = useState('https://digilib.pancabudi.ac.id/asset/images/buku/no-cover-book.jpg')
+    const [imgpreview, setimgpreview] = useState('https://www.heritagechristiancollege.com/wp-content/uploads/2019/05/free-book-cover-design-templates-of-diy-book-covers-of-free-book-cover-design-templates.jpg')
 
 
     //used directly in register to prevent conflict after facing them:
@@ -98,7 +100,7 @@ function AddBook() {
                                 //use multiple for select more then one file:
                                 //onChange={handleChange} //incountered issue due to react-hool-form
                                 {...register('file', {
-                                    required: true,
+                                    // required: true,
                                     //Solved by introduce the event in register:
 
                                     onChange: (e) => {

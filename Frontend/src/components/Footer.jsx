@@ -3,16 +3,17 @@ import React from 'react'
 function Footer() {
     return <>
         <div>
-            <hr />
-            <footer className="footer footer-center bg-base-200 text-base-content rounded mt-4 px-8 md:px-16">
-                <nav className="grid grid-flow-col gap-4">
+        <hr className='bg-red-600 w-[95%]  h-1 rounded mx-auto mb-4' />
+            <footer className="footer gap-4 mb-3 footer-center bg-base-200 text-base-content rounded  px-8 md:px-16 ">
+                {/* <nav className="grid grid-flow-col gap-4">
                     <a className="link link-hover hover:text-red-600">About us</a>
                     <a className="link link-hover hover:text-red-600">Contact</a>
                     <a className="link link-hover hover:text-red-600">Jobs</a>
                     <a className="link link-hover hover:text-red-600">Press kit</a>
-                </nav>
-                <nav>
-                    <div className="grid grid-flow-col gap-4">
+                </nav> */}
+                
+                <nav className=''>
+                    <div className="grid grid-flow-col gap-12">
                         <a>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -48,8 +49,8 @@ function Footer() {
                         </a>
                     </div>
                 </nav>
-                <aside>
-                    <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
+                <aside className='mt-0' >
+                    <p>Copyright © {new Date().getFullYear()} - Deesu Bainsla Creations</p>
                 </aside>
             </footer>
         </div>

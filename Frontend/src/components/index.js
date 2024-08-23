@@ -4,7 +4,7 @@ import FreeBooks from "./FreeBooks";
 import Footer from "./Footer";
 import CardSlider from "./CardSlider";
 import Card from "./Card";
-import About from "./About";
+import Profile from "./Profile";
 import Contact from "./Contact";
 import Books from "./Books";
 import Signup from "./Signup";
@@ -12,4 +12,4 @@ import Logout from "./Logout";
 import AddBook from "./AddBook";
 
 
-export {Navbar, Home, FreeBooks, Footer, CardSlider, Card, Books, Contact, About, Signup,Logout,AddBook}
+export {Navbar, Home, FreeBooks, Footer, CardSlider, Card, Books, Contact, Profile, Signup,Logout,AddBook}

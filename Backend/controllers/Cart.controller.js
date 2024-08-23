@@ -7,11 +7,11 @@ export const addingtoCart = async(req, res)=>{
      if(!cart){
         return res.status(404).json({message:'Cart is not found'})
      }
-     if(cart.items.includes(bookid)){
+     if(cart.items.includes(bookid)){//to check if book is already present:
          return res.status(400).json({message:"Book already present"});
      }
  
-     cart.items.push(bookid);
+     cart.items.push(bookid);//simply push the book like array:
      await cart.save();
      res.status(200).json({message:"Book added successfully"});
    } catch (error) {

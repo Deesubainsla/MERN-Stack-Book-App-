@@ -1,13 +1,16 @@
 import React, { useContext } from 'react'
 import { userContext } from '../context/AuthUserContext'
 import {toast} from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom';
 
 function Logout() {
     const userInfo = useContext(userContext);
+    const navigate = useNavigate();
   return <>
     <div>
             <button
                 onClick={() =>{
+                    navigate('/');
                     userInfo.setuser(undefined);
                     localStorage.removeItem('User');
                     toast.success("Logout successfully")

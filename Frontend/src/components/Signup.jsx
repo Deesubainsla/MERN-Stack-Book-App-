@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
@@ -15,6 +15,7 @@ function Signup() {
     } = useForm()
     const onSubmition = (data) =>{
         const userInfo = {
+            file: (data.file[0]? data.file[0]: profile) ,
             name: data.name,
             email: data.email,
             password: data.password
@@ -22,7 +23,12 @@ function Signup() {
         const signin = (async()=>{
             try {
                 await axios
-                .post("http://localhost:3000/user/signin",userInfo)
+                .post("http://localhost:3000/user/signin",userInfo,{
+                    headers:{
+                       'Content-Type': 'multipart/form-data'
+                    }//imp for multer to know for upload fields
+                    //it is auto set in case of axios for formdata:
+                })
                 .then((res)=>{
                      toast.success("User Signin successfully:")
                      localStorage.setItem('User', JSON.stringify(res.data.user))
@@ -37,6 +43,7 @@ function Signup() {
        
     }
 
+    const [profile, setprofile] = useState('https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png')
     //to use navigate directly we have to use useNavigate() hook given by react-router-dom
     
     return <>
@@ -54,6 +61,36 @@ function Signup() {
 
                         }}>✕</button>
                         <h2 className="text-2xl font-bold text-red-600 mb-10">Signup</h2>
+
+
+                        <div className='mb-5'>
+                            <div className='w-full mb-2   h-[200px]  flex justify-center items-center'>
+                                <img className='border-2 h-full  w-[200px] rounded-full' src={profile} alt="uploadedimg" />
+                            </div>
+                            <input type="file"
+                                //use multiple for select more then one file:
+                                //onChange={handleChange} //incountered issue due to react-hool-form
+                                {...register('file', {
+                                    // required: true,
+                                    //Solved by introduce the event in register:
+
+                                    onChange: (e) => {
+
+                                        // console.log("e.target.files ",e.target.files);
+                                        const fileimg = e.target.files[0];
+                                        if (fileimg) {
+                                            const reader = new FileReader();
+                                            reader.onloadend = () => {
+                                                setprofile(reader.result);
+                                                // setValue('file',fileimg);
+                                            };
+                                            reader.readAsDataURL(fileimg);
+                                        }
+                                    }
+                                })} />
+                            {errors.file && <span className='text-red-600 text-sm'>This field is required:</span>}
+                        </div>
+
                         <div className='mb-5'>
                             <span>Name:</span><br />
                             <input className='p-1 w-full dark:text-black outline-none rounded-md border-[2px]' type="text" placeholder='Enter your Name' {...register("name", { required: true })} />

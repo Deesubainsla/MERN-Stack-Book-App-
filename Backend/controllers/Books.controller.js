@@ -34,13 +34,25 @@ export const addBook = async(req, res)=>{
     // }
 
     try {
-       
+    //    res.status(200).json({
+    //     message:"successfull",
+    //     body: req.body,
+    //     file: req.file
+    //    })
         const {title, description, price, category} = req.body;
-        const imgpath = req.file.path;
-        const data = await uploadonCloudinary(imgpath);
-        if(!data) return res.status(401).json({message:"Path is not Specified"})
+        let imgurl;//Global variable for this block
+        if(req.file){
 
-        const imgurl = data.url;
+            const imgpath = req.file.path;
+            const data = await uploadonCloudinary(imgpath);
+            if(!data) return res.status(401).json({message:"Path is not Specified"})
+            imgurl = data.url;
+        }
+        else{
+            imgurl = req.body.file;
+            //if you will initialize imgurl in if or else like const imgurl then it's
+            //scope is limited in this block only.
+        }
     
         const newBook = new Book({
             title,
@@ -53,6 +65,7 @@ export const addBook = async(req, res)=>{
         await newBook.save();
         res.status(200).json({message:"New Book added successfully"})
     } catch (error) {
-        res.status(401).json({message:"Something went wrong while adding book"})
+       
+        res.status(401).json({message:"Something went wrong in adding Book"})
     }
 }
