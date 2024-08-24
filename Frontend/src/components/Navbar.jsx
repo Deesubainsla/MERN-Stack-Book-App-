@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { useForm } from "react-hook-form"
-
+import {ItemCard} from './index.js';
 
 import axios from 'axios';
 import { toast } from 'react-hot-toast'
@@ -15,6 +15,24 @@ function Navbar() {
     // })//for understanding only:
 
     const userInfo = useContext(userContext);
+    const [cartbooks, setcartbooks] = useState([]);
+    
+    useEffect(() => {
+        (async()=>{
+            const info = {
+                usermail: userInfo.user.email
+            }
+            const res = await axios.post('http://localhost:3000/addtokart/getcartitems',info);
+            userInfo.setcartcount(res.data.length);
+            setcartbooks(res.data);
+            // console.log('cartcount is here: ',userInfo.cartcount);
+            // console.log('bookslength is here: ',res.data.length);
+            // console.log(books, 'length: ',books.length);
+        })();
+    }, [userInfo.cartcount])
+    
+    
+    
     //can write like this also:
     // const {setuser} = useContext(userContext);
     const {
@@ -166,6 +184,13 @@ function Navbar() {
         document.querySelector("ion-icon").name = 'menu';
         setnavshow('top-[-100%]');
     }
+
+    const [cart, setcart] = useState('translate-x-[200%]');
+    const handleCart = ()=>{
+        // userInfo.setcartcount(0);
+        const items = document.querySelector('#cartitem');
+        cart == 'translate-x-[200%]'? setcart('translate-x-[0%]'): setcart('translate-x-[200%]');
+    }
     
     const handleClick = (e) => {
         const nav = document.querySelector(".phone-nav");
@@ -202,7 +227,7 @@ function Navbar() {
                                 </button>
                             </div>
 
-                            <div className={`transition ease-out py-2 phone-nav w-full duration-1000 left-[0] ${navshow}   fixed ${scrolled ? "dark:bg-gray-800 bg-gray-200" : "bg-white dark:bg-slate-900 "}   `} >
+                            <div className={`transition  py-2 phone-nav w-full duration-1000 left-[0] ${navshow}   fixed ${scrolled ? "dark:bg-gray-800 bg-gray-200" : "bg-white dark:bg-slate-900 "}   `} >
 
                                 <hr className='bg-red-600 w-[95%]  h-1 rounded mx-auto mb-2' />
 
@@ -316,7 +341,7 @@ function Navbar() {
                     </div>
                     <div className='hidden md:block px-2'>
                         <label className="border border-gray-300 px-2 py-1 rounded-md flex items-center gap-2">
-                            <input type="text" className="bg-transparent  outline-none  " placeholder="Search" />
+                            <input onChange={(e)=>userInfo.setsearch(e.target.value)} type="text" className="bg-transparent  outline-none  " placeholder="Search" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16"
@@ -349,6 +374,31 @@ function Navbar() {
                     >
                         {darkmodeToggleButton}
                     </button>
+                    
+                    <div className='relative mr-5 ml-2'>
+                        <div onClick={handleCart} className=' flex items-center justify-center'>
+                            <ion-icon size='large' name="cart"></ion-icon>
+
+                            {userInfo.cartcount>0 && 
+                                <span className={`top-[-10%] right-[-10%] rounded-full absolute  text-white flex justify-center items-center p-2 text-sm bg-red-600 h-[15px] w-[15px]`}>{userInfo.cartcount}</span>
+                            }
+                            
+                        </div>
+
+                        <div id='cartitem' className={`fixed  rounded ${cart} duration-1000  bg-red-200 right-[32px] top-[64px] md:right-[64px] w-[40%]  lg:w-[25%] pt-1 pb-6 px-2 `}>
+
+                            {cartbooks.length>0? 
+                                    cartbooks.map((book)=>(
+                                        <div key={book._id}>
+                                            <ItemCard book={book} />
+                                        </div>
+                                   ))
+                            : <div>No item present</div> }
+                            
+                           
+                        </div>
+
+                    </div>
 
                     <div>
                         {userInfo.user ? <Logout /> :

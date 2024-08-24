@@ -5,12 +5,16 @@ import axios from 'axios';
 
 
 function Card({card}) {
-    const {user} = useContext(userContext);
+    const userInfo = useContext(userContext);
+   
     const addtokart = async(bookid, userid)=>{
         // console.log(user);
         // if(!user){
         //     return toast.error("Login compulsory");
         // }
+        
+        userInfo.setcartcount(prev=> prev+1);
+        // console.log(userInfo.cartcount);
         const info = {
             userid,
             bookid
@@ -45,7 +49,7 @@ function Card({card}) {
                                 (card.category=="Free")?'Free': card.price 
                             }</div>
                         <div onClick={()=>{
-                            user? addtokart(card._id, user._id) :toast.error("Login compulsory");
+                            userInfo.user ? addtokart(card._id, userInfo.user._id) :toast.error("Login compulsory");
                         }}  className="hover:cursor-pointer transition transform duration-300 hover:shadow-lg hover:scale-110 bg-red-600 text-white badge badge-outline">Add+</div>
                     </div>
                 </div>

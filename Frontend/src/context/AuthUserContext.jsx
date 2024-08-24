@@ -7,9 +7,11 @@ const userContext = createContext();//like a storage for context state
 const UserContextProvider = ({children})=>{
     const localInfo = JSON.parse(localStorage.getItem('User'));
     const [user, setuser] = useState(localInfo? localInfo: undefined);
+    const [search, setsearch] = useState('');
+    const [cartcount, setcartcount] = useState(0);
     // const [user, setuser] = useState("Hello context is working properly:");
     return(
-        <userContext.Provider value={{user, setuser}}>
+        <userContext.Provider value={{user, setuser, search, setsearch,cartcount,setcartcount}}>
             {children}
         </userContext.Provider>
     );

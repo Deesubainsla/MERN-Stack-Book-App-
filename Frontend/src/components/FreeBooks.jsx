@@ -28,7 +28,7 @@ function FreeBooks() {
         <div className='mb-12'>
         
             <div className='mb-11'>
-                <h1 className='text-lg my-3 font-semibold'>Free Books suggested for you:</h1>
+                <h1 className='text-xl my-3 font-semibold'>Free Books suggested for you:</h1>
                 <p className='text-lg leading-relaxed'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, laboriosam! Cumque placeat adipisci inventore iusto ad consectetur iste ab asperiores!!!</p>
             </div>
 

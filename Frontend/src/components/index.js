@@ -10,6 +10,7 @@ import Books from "./Books";
 import Signup from "./Signup";
 import Logout from "./Logout";
 import AddBook from "./AddBook";
+import ItemCard from "./ItemCard";
 
 
-export {Navbar, Home, FreeBooks, Footer, CardSlider, Card, Books, Contact, Profile, Signup,Logout,AddBook}
+export {Navbar, Home, FreeBooks, Footer, CardSlider, Card,ItemCard, Books, Contact, Profile, Signup,Logout,AddBook}
