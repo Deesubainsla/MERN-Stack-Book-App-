@@ -29,7 +29,7 @@ function Navbar() {
             // console.log('bookslength is here: ',res.data.length);
             // console.log(books, 'length: ',books.length);
         })();
-    }, [userInfo.cartcount])
+    }, [userInfo.cartcount, userInfo.user])
     
     
     
@@ -178,11 +178,11 @@ function Navbar() {
     //     setisMenu(!isMenu);
     // };
     
-    const [navshow, setnavshow] = useState('top-[-100%]')
+    const [navshow, setnavshow] = useState('translate-y-[-150%]')
 
     const closenav = ()=>{
         document.querySelector("ion-icon").name = 'menu';
-        setnavshow('top-[-100%]');
+        setnavshow('translate-y-[-150%]');
     }
 
     const [cart, setcart] = useState('translate-x-[200%]');
@@ -194,15 +194,15 @@ function Navbar() {
     
     const handleClick = (e) => {
         const nav = document.querySelector(".phone-nav");
-        let opennav = nav.classList.contains('translate-y-[19px]');
+        let opennav = nav.classList.contains('translate-y-[0%]');
         if (!opennav) {
             e.target.name = 'close';
-            setnavshow('translate-y-[19px]');
+            setnavshow('translate-y-[0%]');
             // nav.classList.replace('top-[-100%]','top-[9%]');
         }
         else {
             e.target.name = 'menu';
-            setnavshow('top-[-100%]')
+            setnavshow('translate-y-[-150%]')
             // nav.classList.replace('top-[9%]','top-[-100%]');
         }
 
@@ -215,7 +215,7 @@ function Navbar() {
         <div className={`px-8  dark:text-white md:px-16 transition duration-300 sticky z-50 top-0 left-0 right-0  ${scrolled ? 'bg-gray-200 dark:bg-gray-800  shadow-md ' : 'bg-white dark:bg-slate-900'} `}>
 
 
-            <div className="p-0    navbar ">
+            <div className={`p-0 navbar ${scrolled ? 'bg-gray-200 dark:bg-gray-800' : 'bg-white dark:bg-slate-900'}`} >
                 <div className="navbar-start">
                     <div className="dropdown lg:hidden" >
                         {/* onClick={() => setisMenu(!isMenu)} */}
@@ -227,9 +227,9 @@ function Navbar() {
                                 </button>
                             </div>
 
-                            <div className={`transition  py-2 phone-nav w-full duration-1000 left-[0] ${navshow}   fixed ${scrolled ? "dark:bg-gray-800 bg-gray-200" : "bg-white dark:bg-slate-900 "}   `} >
+                            <div className={`transition  py-2 phone-nav w-full duration-1000  left-[0] top-[64px] ${navshow} -z-10  fixed ${scrolled ? "dark:bg-gray-800 bg-gray-200" : "bg-white dark:bg-slate-900 "}   `} >
 
-                                <hr className='bg-red-600 w-[95%]  h-1 rounded mx-auto mb-2' />
+                                <hr className='bg-red-600 w-[85%]  h-1 rounded mx-auto mb-2' />
 
                                 {/* <div className='pl-8 md:pl-16'> */}
                                 <div className=''>
@@ -281,12 +281,12 @@ function Navbar() {
                                     {/* <hr className='absolute bottom-1' /> */}
                                 </div>
                                 
-                                <hr className='bg-red-600 w-[95%]  h-1 rounded mx-auto mt-2' />
+                                <hr className='bg-red-600 w-[85%]  h-1 rounded mx-auto mt-2' />
 
                             </div>
                         </div>
                     </div>
-                    <Link to='/' className="btn ml-1 lg:ml-0 btn-ghost text-xl p-0 transform transition ease-in-out duration-300 hover:text-red-600 hover:scale-110  ">BookApp</Link>
+                    <Link to='/' className="btn ml-1 lg:ml-0 btn-ghost text-xl  p-0 transform  transition ease-in-out  duration-300 hover:text-red-600 hover:scale-110  ">BookApp</Link>
 
                 </div>
                 <div className="navbar-end">
@@ -375,7 +375,8 @@ function Navbar() {
                         {darkmodeToggleButton}
                     </button>
                     
-                    <div className='relative mr-5 ml-2'>
+                    {/* if user is present then only the cart will render */}
+                    {userInfo.user &&   <div className='relative mr-5 ml-2'>
                         <div onClick={handleCart} className=' flex items-center justify-center'>
                             <ion-icon size='large' name="cart"></ion-icon>
 
@@ -399,6 +400,7 @@ function Navbar() {
                         </div>
 
                     </div>
+                    }
 
                     <div>
                         {userInfo.user ? <Logout /> :
@@ -460,6 +462,10 @@ function Navbar() {
 
             </div>
         </div>
+
+        
+
+
     )
 }
 

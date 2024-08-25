@@ -48,19 +48,20 @@ function Signup() {
     
     return <>
         <div>
-            <div id="myModal" className=" fixed  inset-0 backdrop-blur-sm bg-white/30 bg-opacity-50 flex items-center justify-center ">
-                <div className=" bg-white dark:bg-slate-900  relative rounded-lg   p-8 rounded shadow-lg w-[90%] md:w-1/2 ">
+            <div id="myModal" className=" fixed  inset-0 backdrop-blur-sm bg-white/30 bg-opacity-50 flex  z-10 justify-center ">
+                <div className=" bg-white h-fit dark:bg-slate-900 relative top-[72px] rounded-lg py-4 px-6 shadow-lg w-[90%] md:w-1/2  ">
                     {/* <div className="flex justify-end">
                         <button id="closeModalBtn" className="text-gray-500 hover:text-gray-800"
                         onClick={()=>document.querySelector("#myModal").classList.add("hidden")}
                         >&times;</button>
                     </div> */}
                     <form onSubmit={handleSubmit(onSubmition)}>
-                        <button className="dark:text-white btn h-[50px] w-[50px] hover:bg-slate-200 dark:hover:bg-slate-800 btn-sm btn-circle btn-ghost absolute right-2 sm:right-6 top-2 sm:top-6" onClick={() => {
+
+                        {/* <button className="dark:text-white btn h-[50px] w-[50px] hover:bg-slate-200 dark:hover:bg-slate-800 btn-sm btn-circle btn-ghost absolute right-2 sm:right-6 top-2 sm:top-6" onClick={() => {
                             navigate('/');
 
                         }}>✕</button>
-                        <h2 className="text-2xl font-bold text-red-600 mb-10">Signup</h2>
+                        <h2 className="text-2xl font-bold text-red-600 mb-10">Signup</h2> */}
 
 
                         <div className='mb-5'>

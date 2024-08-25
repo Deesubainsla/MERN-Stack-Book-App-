@@ -2,7 +2,9 @@ import React from 'react'
 
 function Contact() {
   return (
-    <div className='my-auto'>Contact</div>
+    <div className='py-[36vh] flex justify-center items-center'>
+    <span className='text-2xl font-bold text-red-600' >Contact is Under Developnment:</span>
+  </div>
   )
 }
 

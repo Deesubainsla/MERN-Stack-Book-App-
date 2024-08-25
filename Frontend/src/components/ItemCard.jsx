@@ -24,7 +24,7 @@ function ItemCard({book}) {
     }
 
     return <>
-        <div className='bg-white rounded overflow-hidden my-1   p-1 h-[60px] flex '>
+        <div className='bg-white rounded overflow-hidden my-1 dark:text-black  p-1 h-[60px] flex '>
             <div className=' w-[25%] '>
                 <img className='h-full w-full' src={book.image} alt="bookimg" />
             </div>
