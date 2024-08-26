@@ -22,7 +22,7 @@ function Navbar() {
             const info = {
                 usermail: userInfo.user.email
             }
-            const res = await axios.post('http://localhost:3000/addtokart/getcartitems',info);
+            const res = await axios.post('/addtokart/getcartitems',info);
             userInfo.setcartcount(res.data.length);
             setcartbooks(res.data);
             // console.log('cartcount is here: ',userInfo.cartcount);
@@ -41,26 +41,23 @@ function Navbar() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = async (data) => {
+    const onSubmit = async(data) => {
         const info = {
             email: data.email,
             password: data.password
         }
         try {
-            await axios.post('http://localhost:3000/user/login', info)
-                .then((res) => {
-                    toast.success("Login successfully:"
-                        //can castumize many things check chatgpt:
-                        // ,{
-                        // duration: 3000, // Duration in milliseconds
-                        // }
-                    );
-
+            await axios.post('/user/login', info)
+                .then(async(res) => {
+                    toast.success(`Welcome ${res.data.user.name}`);
                     localStorage.setItem('User', JSON.stringify(res.data.user));
 
-                    userInfo.setuser(res.data.user);
+                    await userInfo.setuser(res.data.user);     
+                                   
                     document.querySelector("#myModal").classList.add("hidden");
-
+                    
+                    
+                    
 
                     // console.log(localStorage.getItem('User'));
                     // console.log(JSON.parse(localStorage.getItem('User')));
@@ -258,7 +255,7 @@ function Navbar() {
                                             }>Home</NavLink></div>
                                         <div className='flex justify-center items-center'><NavLink onClick={()=>{
                                             closenav();
-                                            userInfo.user?'':toast.error('To access Books Login in compulsory');
+                                            userInfo.user?'':toast.error('To access Books Login is compulsory');
                                         }} to='/books' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
@@ -298,7 +295,7 @@ function Navbar() {
                                 }>Home</NavLink></li>
                             <li><NavLink onClick={()=>{
 
-                                userInfo.user?'':toast.error('To access Books Login in compulsory');
+                                userInfo.user?'':toast.error('To access Books Login is compulsory');
 
                             }} to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                 style={({ isActive }) =>

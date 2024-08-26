@@ -24,7 +24,7 @@ function Home() {
                 message: feedback.current.value
             }
 
-            await axios.post('http://localhost:3000/user/feedback',Info)
+            await axios.post('/user/feedback',Info)
             .then((res)=>{
                 
                feedback.current.value = '';

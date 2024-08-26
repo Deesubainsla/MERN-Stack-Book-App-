@@ -27,6 +27,7 @@ function AddBook() {
             // file: imgpreview ,//using reader.readAsDataURL(fileimg) url is not recomended as it takes more storage in DB
             file: (data.file[0])?data.file[0] : imgpreview ,
             title: data.title,
+            url: data.url,
             description: data.description,
             price: data.price,
             category: data.category
@@ -34,7 +35,7 @@ function AddBook() {
         try {
             // console.log("Here are the files:")
             // console.log(data.files);
-            await axios.post("http://localhost:3000/books/addbook", formdata
+            await axios.post("/books/addbook", formdata
                 , {
                     // header means additionla info from client to server here it is content-type:
                     headers: {
@@ -77,9 +78,9 @@ function AddBook() {
 
 
     return <>
-        <div className='h-full w-full'>
-            <div id="myModal" className=" fixed  inset-0 z-40 backdrop-blur-sm bg-white/30 bg-opacity-50 flex justify-center ">
-                <div className=" bg-white dark:bg-slate-900  relative top-[70px] rounded-lg px-6    rounded shadow-lg w-[90%] md:w-1/2 ">
+        <div className='w-full flex justify-center py-6'>
+            
+                <div className=" bg-white dark:bg-slate-900  relative rounded-lg p-6     shadow-lg w-[90%] md:w-1/2 ">
                     {/* <div className="flex justify-end">
                         <button id="closeModalBtn" className="text-gray-500 hover:text-gray-800"
                             onClick={() => document.querySelector("#myModal").classList.add("hidden")}
@@ -126,6 +127,14 @@ function AddBook() {
                             <input className='p-1 dark:text-black w-full outline-none rounded-md border-[2px]' type="text" placeholder="Enter Book's title" {...register("title", { required: true })} />
                             <br />
                             {errors.title && <span className='text-red-600 text-sm'>This field is required:</span>}
+
+                        </div>
+
+                        <div className='mb-5'>
+                            <span>URL:</span><br />
+                            <input className='p-1 dark:text-black w-full outline-none rounded-md border-[2px]' type="text" placeholder="Enter Book's url" {...register("url", { required: true })} />
+                            <br />
+                            {errors.url && <span className='text-red-600 text-sm'>This field is required:</span>}
 
                         </div>
                         {/* <div className='mb-5'>
@@ -178,7 +187,7 @@ function AddBook() {
 
                     </form>
                 </div>
-            </div>
+            
         </div>
     </>
 }

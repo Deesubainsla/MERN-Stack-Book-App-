@@ -20,7 +20,7 @@ function Card({card}) {
             bookid
         }
         try {
-            await axios.post('http://localhost:3000/addtokart',info)
+            await axios.post('/addtokart',info)
             .then((res)=>{
                 toast.success(res.data.message);
             })
@@ -30,7 +30,9 @@ function Card({card}) {
     }
 
     const handlewikipedia = ()=>{
-        window.open('https://en.wikipedia.org/wiki/A_Game_of_Thrones','_blank');
+        if(userInfo.user) window.open(`${card.url}`,'_blank');
+        else toast.error("Login is compulsory to access Books")
+        
     }
 
     return <>
@@ -57,7 +59,8 @@ function Card({card}) {
                     <div className="card-actions justify-between">
                         <div className="hover:cursor-pointer transition transform duration-300  hover:scale-110 hover:shadow-lg bg-red-600 text-white badge badge-outline">{
                                 //for javaScript:
-                                (card.category=="Free")?'Free': card.price 
+                                (card.category=="Free")?'Free': 
+                                    <div className='w-fit'>${card.price}</div> 
                             }</div>
                         <div onClick={()=>{
                             userInfo.user ? addtokart(card._id, userInfo.user._id) :toast.error("Login compulsory");

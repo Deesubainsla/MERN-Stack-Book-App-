@@ -8,7 +8,7 @@ function FreeBooks() {
     useEffect(() => {
       const getdata = async()=>{
        try {
-         await axios.get('http://localhost:3000/books')
+         await axios.get('/books')
          .then((res)=>{
              const free = res.data.filter((card) => card.category === "Free");
              setfreelist(free);

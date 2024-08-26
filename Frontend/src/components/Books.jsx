@@ -13,7 +13,7 @@ function Books() {
     useEffect(() => {
         const getdata = async () => {
             try {
-                const res = await axios.get('http://localhost:3000/books');
+                const res = await axios.get('/books');
                 const filteredData = res.data.filter((book) => (
                     book.title.toLowerCase().includes(search.toLowerCase())
                 ))

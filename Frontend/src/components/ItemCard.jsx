@@ -12,7 +12,7 @@ function ItemCard({book}) {
             bookid: book._id
         }
         try {
-            await axios.post('http://localhost:3000/addtokart/removeitem',info)
+            await axios.post('/addtokart/removeitem',info)
             .then((res)=>{
                 userInfo.setcartcount(prev=> prev-1);
                 toast.success(res.data.message);
@@ -31,7 +31,7 @@ function ItemCard({book}) {
             <div className=' w-full flex flex-col px-1'>
                 <div className='font-semibold'>{book.title}</div>
                 <div className='flex justify-between'>
-                    <div>{book.price}</div>
+                    <div>${book.price}</div>
                     <button onClick={handleremove} className='text-[10px] bg-red-600 px-1 text-white rounded '>remove</button>
                 </div>
             </div>

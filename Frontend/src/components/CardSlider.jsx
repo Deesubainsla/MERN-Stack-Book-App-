@@ -14,7 +14,7 @@ function CardSlider({ cards }) {
         //it is a IIFE(immediately invoked function expression) run automatic without call them explicitly.
       (async()=>{
        try {
-            const res = await axios.get('http://localhost:3000/books');
+            const res = await axios.get('/books');
             //(list.length) for finding length and know if the array is empty: 
             setlist(res.data.filter((item) => item.category === 'Free'));
             setloading(false);

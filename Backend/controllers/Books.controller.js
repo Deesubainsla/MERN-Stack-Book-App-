@@ -39,7 +39,7 @@ export const addBook = async(req, res)=>{
     //     body: req.body,
     //     file: req.file
     //    })
-        const {title, description, price, category} = req.body;
+        const {title,url, description, price, category} = req.body;
         let imgurl;//Global variable for this block
         if(req.file){
 
@@ -56,6 +56,7 @@ export const addBook = async(req, res)=>{
     
         const newBook = new Book({
             title,
+            url,
             image:imgurl,
             description,
             price, 

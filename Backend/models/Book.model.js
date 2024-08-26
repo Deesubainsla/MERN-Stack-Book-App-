@@ -6,6 +6,10 @@ const bookSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    url:{
+        type: String,
+        required:true
+    },
     //can also write like (tittle:String) but not suggested due to less flexibility
     image:{
         type:String,
@@ -16,7 +20,7 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     price:{
-        type:String,
+        type: Number,
         required: true
     },
     category:{

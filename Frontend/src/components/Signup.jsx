@@ -23,16 +23,16 @@ function Signup() {
         const signin = (async()=>{
             try {
                 await axios
-                .post("http://localhost:3000/user/signin",userInfo,{
+                .post("/user/signin",userInfo,{
                     headers:{
                        'Content-Type': 'multipart/form-data'
                     }//imp for multer to know for upload fields
                     //it is auto set in case of axios for formdata:
                 })
                 .then((res)=>{
-                     toast.success("User Signin successfully:")
                      localStorage.setItem('User', JSON.stringify(res.data.user))
                      userInformation.setuser(res.data.user);
+                     toast.success(`Welcome ${res.data.user.name}`)
                      navigate('/books');
                     })
 
