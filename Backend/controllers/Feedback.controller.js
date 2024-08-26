@@ -12,14 +12,14 @@ export const addfeedback = async(req, res)=>{
                 messages:[message]
             })
             await feedback.save();
-            return res.status(200).json({message:"Feedback sent successfully"})
+            return res.status(200).json({message:"Feedback sent to Deesu Bainsla"})
         }
 
         feedback.messages.push(message);
         await feedback.save();
-        res.status(200).json({message:"Feedback sent successfully"})
+        res.status(200).json({message:"Feedback sent to Deesu Bainsla"})
         
     } catch (error) {
-        res.status(400).json({message:error.message})
+        res.status(400).json({message:'Something went wrong in sending feedback'})
     }
 }
