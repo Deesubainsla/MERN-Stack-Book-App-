@@ -268,10 +268,10 @@ function Navbar() {
                                                 }>AddBook</NavLink></div>
                                         }
 
-                                        <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/contact' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                        <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/users' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
-                                            }>Contact</NavLink></div>
+                                            }>Users</NavLink></div>
                                        
                                             
                                     </div>
@@ -311,10 +311,10 @@ function Navbar() {
                             }
 
 
-                            <li><NavLink to='/contact' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                            <li><NavLink to='/users' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                 style={({ isActive }) =>
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
-                                }>Contact</NavLink></li>
+                                }>Users</NavLink></li>
 
                                 {userInfo.user && 
                                     <li><NavLink to='/profile' 
@@ -366,14 +366,14 @@ function Navbar() {
                         {darkMode? 'light': 'dark'}
                     </button> */}
 
-                    <button className='flex  justify-center items-center border-gray-300 rounded-full p-0.5 mr-2 '
+                    <button className='flex  justify-center items-center border-gray-300 rounded-full p-0.5 mr-1 '
 
                     >
                         {darkmodeToggleButton}
                     </button>
                     
                     {/* if user is present then only the cart will render */}
-                    {userInfo.user &&   <div className='relative mr-5 ml-2'>
+                    {userInfo.user &&   <div className='relative mr-3 ml-1'>
                         <div onClick={handleCart} className=' flex items-center justify-center'>
                             <ion-icon size='large' name="cart"></ion-icon>
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import {Home, Books, Contact, Profile, Signup, AddBook} from './components'
+import {Home, Books, Profile, Signup, AddBook, Users} from './components'
 import './index.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -32,7 +32,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App/>}>
         <Route path='' element={<Home/>} />
         <Route path='/books' element={<BookorSignup/>} />
-        <Route path='/contact' element={<Contact/>} />
+        <Route path='/users' element={<Users/>} />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/signup' element={<Signup/>} />
         <Route path='/addbook' element={<AddBook/>} />

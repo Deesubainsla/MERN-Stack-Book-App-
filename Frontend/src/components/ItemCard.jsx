@@ -29,7 +29,7 @@ function ItemCard({book}) {
                 <img className='h-full w-full' src={book.image} alt="bookimg" />
             </div>
             <div className=' w-full flex flex-col px-1'>
-                <div className='font-semibold'>{book.title}</div>
+                <div className='truncate font-semibold '>{book.title}</div>
                 <div className='flex justify-between'>
                     <div>${book.price}</div>
                     <button onClick={handleremove} className='text-[10px] bg-red-600 px-1 text-white rounded '>remove</button>

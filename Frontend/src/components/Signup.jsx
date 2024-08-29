@@ -48,8 +48,8 @@ function Signup() {
     
     return <>
         <div>
-            <div id="myModal" className=" fixed  inset-0 backdrop-blur-sm bg-white/30 bg-opacity-50 flex  z-10 justify-center ">
-                <div className=" bg-white h-fit dark:bg-slate-900 relative top-[72px] rounded-lg py-4 px-6 shadow-lg w-[90%] md:w-1/2  ">
+            <div id="myModal" className=" fixed  inset-0 top-[64px] items-center backdrop-blur-sm bg-white/30 bg-opacity-50 flex  z-10 justify-center ">
+                <div className=" bg-white h-fit dark:bg-slate-900 rounded-lg py-4 px-6 shadow-lg w-[90%] md:w-1/2  ">
                     {/* <div className="flex justify-end">
                         <button id="closeModalBtn" className="text-gray-500 hover:text-gray-800"
                         onClick={()=>document.querySelector("#myModal").classList.add("hidden")}
