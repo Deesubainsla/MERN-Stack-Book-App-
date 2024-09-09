@@ -45,7 +45,9 @@ app.use('/user', userroute)
 app.use('/addtokart',Cartroute)
 
 
+
 //My Backend Code for providing staticfile(unchangable files like html,js,etc) from frontend dist folder 
+
 const dirpath = path.resolve();
 app.use(express.static(path.join(dirpath,'dist')));
 
@@ -55,9 +57,7 @@ app.get('*',(req,res)=>{
 
 //Backend code ends here:
 
-app.get('/', (req, res) => {
-  res.send('Trying express')
-})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
