@@ -24,8 +24,8 @@ function ItemCard({book}) {
     }
 
     return <>
-        <div className='bg-white rounded overflow-hidden my-1 dark:text-black  p-1 h-[60px] flex '>
-            <div className=' w-[25%] '>
+        {/* <div className='bg-white rounded overflow-hidden my-1 dark:text-black  p-1 h-[60px] flex '>
+            <div className='flex-shrink-0 w-[30%] lg:w-[25%] '>
                 <img className='h-full w-full' src={book.image} alt="bookimg" />
             </div>
             <div className=' w-full flex flex-col px-1'>
@@ -35,7 +35,23 @@ function ItemCard({book}) {
                     <button onClick={handleremove} className='text-[10px] bg-red-600 px-1 text-white rounded '>remove</button>
                 </div>
             </div>
+        </div> */}
+        <div className='bg-white rounded w-full overflow-hidden my-1 dark:text-black p-1 h-[60px] flex'>
+      <div className=' w-[30%] lg:w-[25%]'>
+        <img className='h-full w-full' src={book.image} alt="bookimg" />
+      </div>
+      <div className='flex w-full overflow-hidden flex-col px-1'>
+        <div className='font-semibold w-full truncate'>
+          {book.title}
         </div>
+        <div className='flex justify-between items-center'>
+          <div>${book.price}</div>
+          <button onClick={handleremove} className='text-[10px] bg-red-600 px-1 text-white rounded'>
+            remove
+          </button>
+        </div>
+      </div>
+    </div>
     </>
 }
 

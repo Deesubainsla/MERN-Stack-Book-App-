@@ -14,8 +14,13 @@ function Navbar() {
     //     console.log('Page ',e.pageX,' ',e.pageY );
     // })//for understanding only:
 
+
     const userInfo = useContext(userContext);
     const [cartbooks, setcartbooks] = useState([]);
+
+    
+    
+    
     
     useEffect(() => {
         (async()=>{
@@ -35,40 +40,9 @@ function Navbar() {
     
     //can write like this also:
     // const {setuser} = useContext(userContext);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+    
 
-    const onSubmit = async(data) => {
-        const info = {
-            email: data.email,
-            password: data.password
-        }
-        try {
-            await axios.post('/user/login', info)
-                .then(async(res) => {
-                    toast.success(`Welcome ${res.data.user.name}`);
-                    localStorage.setItem('User', JSON.stringify(res.data.user));
-
-                    await userInfo.setuser(res.data.user);     
-                                   
-                    document.querySelector("#myModal").classList.add("hidden");
-                    
-                    
-                    
-
-                    // console.log(localStorage.getItem('User'));
-                    // console.log(JSON.parse(localStorage.getItem('User')));
-                })
-        } catch (error) {
-            //if error then data present is response, if success then only response
-            // console.log(error);
-            toast.error(error?.response.data.message)
-        }
-    }
-
+    
     //working onetime only at starting:
     //to show modal of login after 10s if user doesnot 
     // useEffect(() => {
@@ -209,7 +183,7 @@ function Navbar() {
 
     return (
 
-        <div className={`px-8  dark:text-white md:px-16 transition duration-300 sticky z-50 top-0 left-0 right-0  ${scrolled ? 'bg-gray-200 dark:bg-gray-800  shadow-md ' : 'bg-white dark:bg-slate-900'} `}>
+        <div className={`px-8 md:px-16   dark:text-white transition duration-300 sticky z-50 top-0 left-0 right-0  ${scrolled ? 'bg-gray-200 dark:bg-gray-800  shadow-md ' : 'bg-white dark:bg-slate-900'} `}>
 
 
             <div className={`p-0 navbar ${scrolled ? 'bg-gray-200 dark:bg-gray-800' : 'bg-white dark:bg-slate-900'}`} >
@@ -234,39 +208,37 @@ function Navbar() {
                                     <div
                                         className="flex flex-col gap-2">
 
-                                        {userInfo.user && 
-                                            <div className='flex justify-center items-center my-1'><NavLink  onClick={closenav} to='/profile' 
-                                            className={({isActive})=>(
+                                        
+                                        <div className='flex justify-center items-center my-1'><NavLink  onClick={closenav} to='/profile' 
+                                        className={({isActive})=>(
 
-                                                //if you use {} return something is compulsory. So, use () or nothing instead. 
+                                            //if you use {} return something is compulsory. So, use () or nothing instead. 
 
-                                                `transform p-0 mx-1 rounded-full transition duration-300  ease-in-out hover:scale-110 ${isActive ? "ring-2 ring-red-600" :""}  `
-                                            )}
-                                            >
-            
-                                            <img className='h-[100px] w-[100px] rounded-full m-1' src={userInfo.user.profile} alt="profileimg" />
-            
-                                            </NavLink></div>
-                                        }
+                                            `transform p-0 mx-1 rounded-full transition duration-300  ease-in-out hover:scale-110 ${isActive ? "ring-2 ring-red-600" :""}  `
+                                        )}
+                                        >
+        
+                                        <img className='h-[100px] w-[100px] rounded-full m-1' src={userInfo.user.profile} alt="profileimg" />
+        
+                                        </NavLink></div>
+                                        
                                             
                                         <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/' className="inline-block transform transition duration-300  ease-in-out hover:scale-110  hover:text-red-600"
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                             }>Home</NavLink></div>
-                                        <div className='flex justify-center items-center'><NavLink onClick={()=>{
-                                            closenav();
-                                            userInfo.user?'':toast.error('To access Books Login is compulsory');
-                                        }} to='/books' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+
+                                        <div className='flex justify-center items-center'><NavLink onClick={()=>{closenav();}} to='/books' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                             style={({ isActive }) =>
                                                 isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                             }>Books</NavLink></div>
 
-                                        {userInfo.user &&
-                                            <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/addbook' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
-                                                style={({ isActive }) =>
-                                                    isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
-                                                }>AddBook</NavLink></div>
-                                        }
+                                        
+                                        <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/addbook' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                                            style={({ isActive }) =>
+                                                isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
+                                            }>AddBook</NavLink></div>
+                                       
 
                                         <div className='flex justify-center items-center'><NavLink onClick={closenav} to='/users' className="inline-block transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                             style={({ isActive }) =>
@@ -283,7 +255,7 @@ function Navbar() {
                             </div>
                         </div>
                     </div>
-                    <Link to='/' className="btn ml-1 lg:ml-0 btn-ghost text-xl  p-0 transform  transition ease-in-out  duration-300 hover:text-red-600 hover:scale-110  ">BookApp</Link>
+                    <Link to='/' className="btn ml-1  underline lg:ml-0 btn-ghost text-2xl  p-0 transform  transition ease-in-out  duration-300 text-red-600 hover:scale-110  ">MyBook</Link>
 
                 </div>
                 <div className="navbar-end">
@@ -293,22 +265,18 @@ function Navbar() {
                                 style={({ isActive }) =>
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                 }>Home</NavLink></li>
-                            <li><NavLink onClick={()=>{
-
-                                userInfo.user?'':toast.error('To access Books Login is compulsory');
-
-                            }} to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
+                            <li><NavLink  to='/books' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                 style={({ isActive }) =>
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                 }>Books</NavLink></li>
 
-                            {/*means if user present then only show addBook functionality */}
-                            {userInfo.user &&
+                           
+                            
                                 <li><NavLink to='/addbook' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
                                     style={({ isActive }) =>
                                         isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                     }>AddBook</NavLink></li>
-                            }
+                            
 
 
                             <li><NavLink to='/users' className="transform transition duration-300  ease-in-out hover:scale-110 hover:text-red-600"
@@ -316,7 +284,7 @@ function Navbar() {
                                     isActive ? { color: '#dc2626', textDecoration: 'underline' } : {}
                                 }>Users</NavLink></li>
 
-                                {userInfo.user && 
+                              
                                     <li><NavLink to='/profile' 
                                     // className={({isActive})=>{
                                     //     `transform ${isActive?"ring-2 ring-red-600":""} p-0 mx-1 transition duration-300  ease-in-out hover:scale-110 hover:text-red-600`
@@ -332,7 +300,7 @@ function Navbar() {
                                     <img className='h-[36px]  w-[36px] rounded-full ' src={userInfo.user.profile} alt="profileimg" />
     
                                     </NavLink></li>
-                                }
+                                
                             
                         </ul>
                     </div>
@@ -383,11 +351,11 @@ function Navbar() {
                             
                         </div>
 
-                        <div id='cartitem' className={`fixed  rounded ${cart} duration-1000  bg-red-200 right-[32px] top-[64px] md:right-[64px] w-[40%]  lg:w-[25%] pt-1 pb-6 px-2 `}>
+                        <div id='cartitem' className={`fixed  rounded ${cart} duration-1000   bg-red-200 right-[32px] top-[64px] md:right-[64px] w-[40%]  lg:w-[25%] pt-1 pb-6 px-2 `}>
 
                             {cartbooks.length>0? 
                                     cartbooks.map((book)=>(
-                                        <div key={book._id}>
+                                        <div className='w-full' key={book._id}>
                                             <ItemCard book={book} />
                                         </div>
                                    ))
@@ -400,60 +368,9 @@ function Navbar() {
                     }
 
                     <div>
-                        {userInfo.user ? <Logout /> :
-                            <button
-                                onClick={() => document.querySelector("#myModal").classList.remove("hidden")}
-                                className=" text-white cursor-pointer hover:shadow-lg bg-red-600 transition duration-200 hover:scale-105  rounded-md px-3 py-2  flex text-center justify-center">Login</button>
-
-                        }
+                       <Logout />
                     </div>
-
-
-
-                    {/* Modal code is here: */}
-                    <div id="myModal" className="hidden fixed  inset-0 bg-slate-300 bg-opacity-50 flex items-center justify-center ">
-                        <div className=" bg-white dark:bg-slate-900 relative rounded-lg   p-8 rounded shadow-lg w-[90%] md:w-1/2">
-                            {/* <div className="flex justify-end">
-                        <button id="closeModalBtn" className="text-gray-500 hover:text-gray-800"
-                        onClick={()=>document.querySelector("#myModal").classList.add("hidden")}
-                        >&times;</button>
-                        </div> */}
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <button className="dark:text-white btn h-[50px] w-[50px] hover:bg-slate-200 dark:hover:bg-slate-800 btn-sm btn-circle btn-ghost absolute right-2 sm:right-6 top-2 sm:top-6" onClick={() => document.querySelector("#myModal").classList.add("hidden")}>✕</button>
-                                <h2 className="text-2xl font-bold text-red-600 mb-10">Login</h2>
-                                <div className='mb-5'>
-                                    <span>Email:</span><br />
-                                    <input className='p-1 w-full dark:text-black outline-none rounded-md border-[2px]' type="email" placeholder='Enter your Email' {...register("email", {
-                                        required: true
-                                        //can also write like this for custom messages and apply
-                                        //multiple validations on single input for min different
-                                        // required:{
-                                        //     value: true,
-                                        //     message: "This hello is required:"
-                                        // }
-                                    })} />
-                                    <br />
-                                    {errors.email && <span className='text-sm text-red-600'>This field is required:</span>}
-                                </div>
-                                <div className='mb-5'>
-                                    <span>Password:</span><br />
-                                    <input className='p-1 w-full dark:text-black outline-none rounded-md border-[2px]' type="password" placeholder='Enter your Password' {...register("password", { required: true })} />
-                                    <br />
-                                    {errors.password && <span className='text-sm text-red-600'>This field is required:</span>}
-                                </div>
-                                {/* <div className='flex justify-center mb-2 items-center sm:hidden'>
-                                <button type='submit' className={`bg-red-600 h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
-                            </div> */}
-                                <div className='flex justify-between'>
-                                    <button type='submit' className={`bg-red-600  h-fit px-2 duration-300 py-1 text-white hover:scale-110 rounded-md mr-4`} >Login</button>
-
-                                    <p className='text-center'>Not Registered?<Link to='/signup' onClick={() => document.querySelector("#myModal").classList.add("hidden")} className='text-blue-600 hover:text-blue-800'>Signup</Link>
-                                    </p>
-
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    
                 </div>
 
 

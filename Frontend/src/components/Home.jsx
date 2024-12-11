@@ -12,10 +12,7 @@ function Home() {
         // const feedbackid = document.querySelector('#feed');
         // console.log(feedback.current.value);
         // feedback.current.value = '';
-       if(!userInfo.user){
-        feedback.current.value = '';
-        return toast.error("Login is compulsory");
-       }
+       
        try {
             
             const Info = {

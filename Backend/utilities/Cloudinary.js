@@ -13,7 +13,7 @@ const uploadonCloudinary = async(localpath)=>{
         const response = await cloudinary.uploader.upload( localpath ,{
             resource_type: 'auto',//auto decide video or photo:
         })
-        fs.unlinkSync(localpath);
+        fs.unlinkSync(localpath);//delete the file from local path:
         return response;
 
     } catch (error) {

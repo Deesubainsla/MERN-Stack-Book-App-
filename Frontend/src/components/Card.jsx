@@ -29,11 +29,7 @@ function Card({card}) {
         }
     }
 
-    const handlewikipedia = ()=>{
-        if(userInfo.user) window.open(`${card.url}`,'_blank');
-        else toast.error("Login is compulsory to access Books")
-        
-    }
+   
 
     return <>
         <div>
@@ -46,7 +42,7 @@ function Card({card}) {
                 </figure>
                 
                 <div className="card-body p-4">
-                    <h2 onClick={handlewikipedia}  
+                    <h2 onClick={()=> window.open(`${card.url}`,'_blank')}  
                     
                     //truncate to append ... if text overflow:
                     className="truncate font-[600] text-xl cursor-pointer hover:text-red-600"
@@ -63,7 +59,7 @@ function Card({card}) {
                                     <div className='w-fit'>${card.price}</div> 
                             }</div>
                         <div onClick={()=>{
-                            userInfo.user ? addtokart(card._id, userInfo.user._id) :toast.error("Login compulsory");
+                           addtokart(card._id, userInfo.user._id)
                         }}  className="hover:cursor-pointer transition transform duration-300 hover:shadow-lg hover:scale-110 bg-red-600 text-white badge badge-outline">Add+</div>
                     </div>
                 </div>

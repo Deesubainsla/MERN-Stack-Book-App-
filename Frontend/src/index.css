@@ -16,6 +16,8 @@ body{
     
 }
 
+
+
 /* Custom styles to ensure arrows are visible */
 .slick-arrow::before {
     color: black;

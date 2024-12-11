@@ -2,6 +2,7 @@ import multer from 'multer'
 
 const storage = multer.diskStorage({
     destination: (req, file, cb)=>{
+        //by null we are specifying the error means if no error(null) then save to "./public/uploads" 
         cb(null, "./public/uploads")
     },
     filename: (req, file, cb)=>{

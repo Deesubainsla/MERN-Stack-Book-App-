@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick"
 import Card from './Card';
-import list1 from "../../public/list.json"
+// import list1 from "../../public/list.json"
 import axios from 'axios';
 
 function CardSlider({ cards }) {
@@ -68,6 +68,7 @@ function CardSlider({ cards }) {
 
     return <>
         {/* this code will show the list after setlist will implement */}
+
         {loading? 'Loading...': <div className="slider-container">
             <Slider {...settings}>
 
@@ -79,6 +80,7 @@ function CardSlider({ cards }) {
 
             </Slider>
         </div> }
+      
         
     </>
 }

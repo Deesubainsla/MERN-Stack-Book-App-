@@ -1,4 +1,4 @@
-import react,{createContext, useContext, useState} from 'react'
+import react,{createContext, useState} from 'react'
 
 const userContext = createContext();//like a storage for context state
 
@@ -17,8 +17,8 @@ const UserContextProvider = ({children})=>{
     );
 };
 
-//can also do for making own hook for accessing userContext
+// can also do for making own hook for accessing userContext
 // const Authuser =() => useContext(userContext);
-// export {userContext, UserContextProvider, Authuser}
+// export { UserContextProvider, Authuser}
 
 export {userContext, UserContextProvider}
